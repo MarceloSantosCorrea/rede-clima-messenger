@@ -88,6 +88,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/confirmation.js?v1.0.0') }}"></script>
+    <script src="{{ asset('assets/js/confirmation.js?v1.0.0', true) }}"></script>
 @endpush
 

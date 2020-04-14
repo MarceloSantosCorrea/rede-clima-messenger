@@ -7,9 +7,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Comentário</title>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/css/bootstrap.min.css', true) }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/css/icons.min.css', true) }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/css/app.min.css', true) }}" rel="stylesheet" type="text/css"/>
         <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
         <style>
             .card-box {

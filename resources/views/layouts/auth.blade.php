@@ -9,9 +9,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
         <!-- App css -->
-        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/css/bootstrap.min.css', true) }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/css/icons.min.css', true) }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/css/app.min.css', true) }}" rel="stylesheet" type="text/css"/>
     </head>
 
     <body class="authentication-bg authentication-bg-pattern">
@@ -22,7 +22,7 @@
             2020 - {{ date('Y') }} &copy; Desenvolvido por
             <a href="https://maximweb.com.br" target="_blank" class="text-white-50">Maxim Web</a>
         </footer>
-        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-        <script src="{{ asset('assets/js/app.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor.min.js', true) }}"></script>
+        <script src="{{ asset('assets/js/app.min.js', true) }}"></script>
     </body>
 </html>
