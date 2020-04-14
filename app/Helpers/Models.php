@@ -6,9 +6,9 @@ class Models
 {
     static public function generateUid(\Illuminate\Database\Eloquent\Model $model, string $field = null): string
     {
-        $uid = uniqid();
+        $uid = \Str::uuid();
         while ($model::where($field ?? 'uid', '=', $uid)->count() > 0) {
-            $uid = uniqid();
+            $uid = \Str::uuid();
         }
         return $uid;
     }
