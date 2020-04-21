@@ -38,6 +38,14 @@ class CommentController extends Controller
             'comment_id' => $comment->uid,
         ];
 
+        try {
+            event(new SendMessagePusher($data));
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        exit();
+
         if ($comment->delete()) {
 
             event(new SendMessagePusher($data));

@@ -107,8 +107,26 @@ class FormCommentController extends Controller
                             'lead_id' => $lead->id,
                         ]);
 
-                        $filename = storage_path("app/public/".\Str::slug($data['dataUser']['name']).".jpeg");
-                        file_put_contents($filename, file_get_contents($data['dataUser']['picture']['data']['url']));
+                        try {
+                            $arrContextOptions = [
+                                "ssl" => [
+                                    "verify_peer"      => false,
+                                    "verify_peer_name" => false,
+                                ],
+                            ];
+
+                            $filename = storage_path("app/public/".\Str::slug($data['dataUser']['name']).".jpeg");
+                            file_put_contents(
+                                $filename,
+                                file_get_contents(
+                                    $data['dataUser']['picture']['data']['url'],
+                                    false,
+                                    stream_context_create($arrContextOptions)
+                                )
+                            );
+                        } catch (\Exception $e) {
+                            return response()->json($e->getMessage(), 500);
+                        }
 
                         $pucherData = [
                             'action'  => $data['action'],

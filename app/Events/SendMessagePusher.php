@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 class SendMessagePusher implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
     /**
      * @var array
      */
@@ -20,7 +21,7 @@ class SendMessagePusher implements ShouldBroadcast
      * SendMessagePusher constructor.
      * @param  array  $data
      */
-    public function __construct(Array $data)
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
