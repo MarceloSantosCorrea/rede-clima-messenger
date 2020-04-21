@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \URL::forceScheme('https');
         \App\Models\Calendar::observe(\App\Observers\CalendarObserver::class);
         \App\Models\Setting::observe(\App\Observers\SettingObserver::class);
     }
