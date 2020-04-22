@@ -25,14 +25,19 @@ class FormCommentController extends Controller
             switch ($data['action']) {
                 case "new-comment":
 
+                    \Log::info(json_encode($data));
+
                     $lead = Lead::where('external_id', $data['dataUser']['id'])->first();
                     if (! $lead) {
                         $lead = Lead::create([
                             'external_id' => $data['dataUser']['id'] ?? null,
                             'name'        => $data['dataUser']['name'],
                             'email'       => $data['dataUser']['email'] ?? null,
-                            'thumbnail'   => $data['dataUser']['picture']['data']['url'],
+                            'thumbnail'   => \Str::slug($data['dataUser']['name']).".jpeg",
                         ]);
+                    } else {
+                        $lead->thumbnail = \Str::slug($data['dataUser']['name']).".jpeg";
+                        $lead->save();
                     }
 
                     $create = Comment::create([
@@ -41,10 +46,23 @@ class FormCommentController extends Controller
                         'lead_id' => $lead->id,
                     ]);
 
-                    $data["comment_id"] = $create->uid;
+                    try {
+                        $filename = storage_path("app/public/".\Str::slug($data['dataUser']['name']).".jpeg");
+                        file_put_contents(
+                            $filename,
+                            file_get_contents($data['dataUser']['picture']['data']['url'])
+                        );
+                    } catch (\Exception $e) {
+                        return response()->json($e->getMessage(), 500);
+                    }
 
-                    event(new SendMessagePusher($data));
-                    return response()->json($create);
+                    $pucherData = [
+                        'action'  => $data['action'],
+                        'comment' => Comment::find($create->id)->toArray(),
+                    ];
+
+                    event(new SendMessagePusher($pucherData));
+                    return response()->json($pucherData);
 
                     break;
                 default:
@@ -88,6 +106,8 @@ class FormCommentController extends Controller
                 switch ($data['action']) {
                     case "new-comment":
 
+                        \Log::info(json_encode($data));
+
                         $lead = Lead::where('external_id', $data['dataUser']['id'])->first();
                         if (! $lead) {
                             $lead = Lead::create([
@@ -108,21 +128,10 @@ class FormCommentController extends Controller
                         ]);
 
                         try {
-                            $arrContextOptions = [
-                                "ssl" => [
-                                    "verify_peer"      => false,
-                                    "verify_peer_name" => false,
-                                ],
-                            ];
-
                             $filename = storage_path("app/public/".\Str::slug($data['dataUser']['name']).".jpeg");
                             file_put_contents(
                                 $filename,
-                                file_get_contents(
-                                    $data['dataUser']['picture']['data']['url'],
-                                    false,
-                                    stream_context_create($arrContextOptions)
-                                )
+                                file_get_contents($data['dataUser']['picture']['data']['url'])
                             );
                         } catch (\Exception $e) {
                             return response()->json($e->getMessage(), 500);
