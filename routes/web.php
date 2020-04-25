@@ -8,6 +8,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('/form-comments/ajax', 'FormCommentController@ajax')->name('form-comments.ajax');
     Route::get('/comments/json', 'CommentController@json')->name('json');
     Route::get('/calendars/json', 'CalendarController@json')->name('json');
+    Route::get('/settings/json', 'SettingController@json')->name('json');
     Route::get('/programation', 'CalendarController@show')->name('programation');
 });
 

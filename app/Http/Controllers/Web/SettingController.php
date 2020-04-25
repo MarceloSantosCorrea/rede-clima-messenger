@@ -37,4 +37,16 @@ class SettingController extends Controller
 
         return redirect()->route('web.settings.index')->with('success', 'Salvo com sucesso.');
     }
+
+    public function json()
+    {
+        $arr  = [];
+        $data = Setting::all();
+        if ($data->count()) {
+            foreach ($data as $item) {
+                $arr[$item->option_name] = $item->option_value;
+            }
+        }
+        return response()->json($arr);
+    }
 }
