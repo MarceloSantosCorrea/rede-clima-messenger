@@ -8,6 +8,14 @@
 
 <div class="form-row">
     <div class="form-group col-md-8">
+        <label for="name" class="col-form-label">E-mail</label>
+        <input type="text" class="form-control" name="setting[email]" id="email"
+               value="{{ $model['email'] ?? null }}">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-8">
         <label for="name" class="col-form-label">Endereço do Stream</label>
         <input type="text" class="form-control" name="setting[stream_url]" id="stream_url"
                value="{{ $model['stream_url'] ?? null }}">

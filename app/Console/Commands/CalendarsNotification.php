@@ -50,7 +50,7 @@ class CalendarsNotification extends Command
                     $data = null,
                     $buttons = null,
                     $schedule = null,
-                    $headings = null
+                    'Rede Clima TV'
                 );
             }
         }
