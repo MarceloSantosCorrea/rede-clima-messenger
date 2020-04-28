@@ -56,4 +56,12 @@
     </div>
 </div>
 
+<div class="form-row">
+    <div class="form-group col-md-8">
+        <label for="name" class="col-form-label">One Signal App ID</label>
+        <input type="text" class="form-control" name="setting[one_signal_app_id]" id="one_signal_app_id"
+               value="{{ $model['one_signal_app_id'] ?? null }}">
+    </div>
+</div>
+
 <button type="submit" class="btn btn-primary waves-effect waves-light">Salvar</button>
