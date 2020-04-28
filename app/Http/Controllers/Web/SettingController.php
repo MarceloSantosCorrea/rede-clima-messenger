@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Events\SendMessagePusher;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -33,6 +34,9 @@ class SettingController extends Controller
                     }
                 }
             }
+
+            $data['action'] = 'change-settings';
+            event(new SendMessagePusher($data));
         }
 
         return redirect()->route('web.settings.index')->with('success', 'Salvo com sucesso.');
